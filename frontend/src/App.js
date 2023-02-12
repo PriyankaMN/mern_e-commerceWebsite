@@ -1,61 +1,72 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-//components:
+// components:
+// components:
 import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
 
+//user components:
+import RoutesWithUserChatComponent from "./components/user/RoutesWithUserChatComponent";
+
+// publicly available pages:
 import HomePage from "./pages/HomePage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
+import ProductListPage from "./pages/ProductListPage";
 import CartPage from "./pages/CartPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import ProductListPage from "./pages/ProductListPage";
 
-//Protected User pages:
-import UserCartDetailsPage from "./pages/user/UserCartDetailsPage";
-import UserOrderDetailsPage from "./pages/user/UserOrderDeatilsPage";
-import UserOrdersPage from "./pages/user/UserOrderPage";
-import UserProfilePage from "./pages/user/UserProfilePage";
 import ProtectedRoutesComponent from "./components/ProtectedRoutesComponent";
 
-//Protected admin pages:
-import AdminAnalyticsPage from "./pages/admin/AdminAnalyticsPage";
-import AdminChatsPage from "./pages/admin/AdminChatsPage";
+// protected user pages:
+import UserProfilePage from "./pages/user/UserProfilePage";
+import UserOrdersPage from "./pages/user/UserOrderPage";
+import UserCartDetailsPage from "./pages/user/UserCartDetailsPage";
+import UserOrderDetailsPage from "./pages/user/UserOrderDeatilsPage";
+
+// protected admin pages:
+import AdminUsersPage from "./pages/admin/AdminUserPage";
+import AdminEditUserPage from "./pages/admin/AdminEditUserPage";
+import AdminProductsPage from "./pages/admin/AdminProductsPage";
 import AdminCreateProductPage from "./pages/admin/AdminCreateProductPage";
 import AdminEditProductPage from "./pages/admin/AdminEditProductPage";
-import AdminEditUserPage from "./pages/admin/AdminEditUserPage";
+import AdminOrdersPage from "./pages/admin/AdminOrdersPage";
 import AdminOrderDetailsPage from "./pages/admin/AdminOrderDetailsPage";
-import AdminOrderPage from "./pages/admin/AdminOrdersPage";
-import AdminProductsPage from "./pages/admin/AdminProductsPage";
-import AdminUserPage from "./pages/admin/AdminUserPage";
+import AdminChatsPage from "./pages/admin/AdminChatsPage";
+import AdminAnalyticsPage from "./pages/admin/AdminAnalyticsPage";
 
 function App() {
   return (
-        <BrowserRouter>
+    <BrowserRouter>
+      <HeaderComponent />
+      <Routes>
+        <Route element={<RoutesWithUserChatComponent />}>
+          {/* publicly available routes: */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/product-list" element={<ProductListPage />} />
+          <Route path="/product-details" element={<ProductDetailsPage />} />
+          <Route path="/product-details/:id" element={<ProductDetailsPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="*" element="Page not exists 404" />
+        </Route>
+        {/* <Route path="/" component={HomePage} />  in previous versions of react-router-dom */}
 
-        <HeaderComponent />
-        
-        <Routes>
-          <Route path = "/" element = {<HomePage />}/>
-          <Route path = "/productDeatils/:id" element = {<ProductDetailsPage />}/>
-          <Route path = "/cart" element = {<CartPage />}/>
-          <Route path = "/login" element = {<LoginPage />}/>
-          <Route path = "/register" element = {<RegisterPage />}/>
-          <Route path = "/productList" element = {<ProductListPage />}/>
-          <Route path = "*" element = "Page doesn't exsists 404"/>
+        {/* user protected routes: */}
+        <Route element={<ProtectedRoutesComponent admin={false} />}>
+          <Route path="/user" element={<UserProfilePage />} />
+          <Route path="/user/my-orders" element={<UserOrdersPage />} />
+          <Route path="/user/cart-details" element={<UserCartDetailsPage />} />
+          <Route
+            path="/user/order-details"
+            element={<UserOrderDetailsPage />}
+          />
+        </Route>
 
-          {/* user protected routes: */}
-
-          <Route element = {<ProtectedRoutesComponent/>}>
-          <Route path = "/user/cart-details" element = {<UserCartDetailsPage />}/>
-          <Route path = "/user/my-orders" element = {<UserOrderDetailsPage />}/>
-          <Route path = "/user/order-details" element = {<UserOrdersPage />}/>
-          <Route path = "/user" element = {<UserProfilePage />}/>
-          </Route>
-
-                    {/* admin protected routes: */}
+        {/* admin protected routes: */}
         <Route element={<ProtectedRoutesComponent admin={true} />}>
-          <Route path="/admin/users" element={<AdminUserPage />} />
+          <Route path="/admin/users" element={<AdminUsersPage />} />
           <Route path="/admin/edit-user" element={<AdminEditUserPage />} />
           <Route path="/admin/products" element={<AdminProductsPage />} />
           <Route
@@ -66,7 +77,7 @@ function App() {
             path="/admin/edit-product"
             element={<AdminEditProductPage />}
           />
-          <Route path="/admin/orders" element={<AdminOrderPage />} />
+          <Route path="/admin/orders" element={<AdminOrdersPage />} />
           <Route
             path="/admin/order-details"
             element={<AdminOrderDetailsPage />}
@@ -74,12 +85,9 @@ function App() {
           <Route path="/admin/chats" element={<AdminChatsPage />} />
           <Route path="/admin/analytics" element={<AdminAnalyticsPage />} />
         </Route>
-
-        </Routes>
-
-        <FooterComponent />
-        </BrowserRouter>
-
+      </Routes>
+      <FooterComponent />
+    </BrowserRouter>
   );
 }
 
