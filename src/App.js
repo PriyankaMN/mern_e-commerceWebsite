@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // components:
-// components:
 import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
 
@@ -22,7 +21,7 @@ import ProtectedRoutesComponent from "./components/ProtectedRoutesComponent";
 import UserProfilePage from "./pages/user/UserProfilePage";
 import UserOrdersPage from "./pages/user/UserOrderPage";
 import UserCartDetailsPage from "./pages/user/UserCartDetailsPage";
-import UserOrderDetailsPage from "./pages/user/UserOrderDeatilsPage";
+import UserOrderDetailsPage from "./pages/user/UserOrderDetailsPage";
 
 // protected admin pages:
 import AdminUsersPage from "./pages/admin/AdminUserPage";
@@ -34,10 +33,12 @@ import AdminOrdersPage from "./pages/admin/AdminOrdersPage";
 import AdminOrderDetailsPage from "./pages/admin/AdminOrderDetailsPage";
 import AdminChatsPage from "./pages/admin/AdminChatsPage";
 import AdminAnalyticsPage from "./pages/admin/AdminAnalyticsPage";
+import ScrollToTop from "./utils/ScrollToTop";
 
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <HeaderComponent />
       <Routes>
         <Route element={<RoutesWithUserChatComponent />}>

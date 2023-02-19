@@ -9,7 +9,7 @@ import {
 } from "react-bootstrap";
 import CartItemComponent from "../../components/CartItemComponent";
 
-const AdminOrderDetailsPage = () => {
+const UserOrderDetailsPage = () => {
   return (
     <Container fluid>
       <Row className="mt-4">
@@ -73,7 +73,7 @@ const AdminOrderDetailsPage = () => {
             <ListGroup.Item>
               <div className="d-grid gap-2">
                 <Button size="lg" variant="danger" type="button">
-                  Mark as delivered
+                  Pay for the order
                 </Button>
               </div>
             </ListGroup.Item>
@@ -84,5 +84,5 @@ const AdminOrderDetailsPage = () => {
   );
 };
 
-export default AdminOrderDetailsPage;
+export default UserOrderDetailsPage;
 
