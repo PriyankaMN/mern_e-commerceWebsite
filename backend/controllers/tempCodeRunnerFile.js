@@ -1,0 +1,1 @@
+console.log(encodeURIComponent("/images/games-category.png"));
