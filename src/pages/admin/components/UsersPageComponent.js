@@ -1,12 +1,28 @@
 import { Row, Col, Table, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import AdminLinksComponent from "../../components/admin/AdminLinksComponent";
+import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 
-const deleteHandler = () => {
-  if (window.confirm("Are you sure?")) alert("User deleted!");
-};
+import { useState, useEffect } from "react";
 
-const AdminUserPage = () => {
+const UsersPageComponent = ({ fetchUsers }) => {
+  const [users, setUsers] = useState([]);
+
+  const deleteHandler = () => {
+    if (window.confirm("Are you sure?")) alert("User deleted!");
+  };
+
+  useEffect(() => {
+    const abctrl = new AbortController();
+    fetchUsers(abctrl)
+      .then((res) => setUsers(res))
+      .catch((er) =>
+        console.log(
+          er.response.data.message ? er.response.data.message : er.response.data
+        )
+      );
+    return () => abctrl.abort();
+  }, []);
+
   return (
     <Row className="m-5">
       <Col md={2}>
@@ -26,18 +42,18 @@ const AdminUserPage = () => {
             </tr>
           </thead>
           <tbody>
-            {["bi bi-check-lg text-success", "bi bi-x-lg text-danger"].map(
-              (item, idx) => (
+            {users.map(
+              (user, idx) => (
                 <tr key={idx}>
                   <td>{idx + 1}</td>
-                  <td>Mark</td>
-                  <td>Twain</td>
-                  <td>email@email.com</td>
+                  <td>{user.name}</td>
+                  <td>{user.lastName}</td>
+                  <td>{user.email}</td>
                   <td>
-                    <i className={item}></i>
+                    {user.isAdmin ? <i className="bi bi-check-lg text-success"></i> : <i className="bi bi-x-lg text-danger"></i>}
                   </td>
                   <td>
-                    <LinkContainer to="/admin/edit-user">
+                    <LinkContainer to={`/admin/edit-user/${user._id}`}>
                       <Button className="btn-sm">
                         <i className="bi bi-pencil-square"></i>
                       </Button>
@@ -61,4 +77,5 @@ const AdminUserPage = () => {
   );
 };
 
-export default AdminUserPage;
+export default UsersPageComponent;
+
