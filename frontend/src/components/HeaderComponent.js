@@ -13,8 +13,11 @@ import {
 
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
+import { logout } from "../redux/actions/userActions";
+import { useDispatch } from "react-redux";
 
 const HeaderComponent = () => {
+    const dispatch = useDispatch();
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -44,7 +47,7 @@ const HeaderComponent = () => {
               </Nav.Link>
             </LinkContainer>
 
-            <NavDropdown title="Priyanka" id="collasible-nav-dropdown">
+            <NavDropdown title="John Doe" id="collasible-nav-dropdown">
               <NavDropdown.Item
                 eventKey="/user/my-orders"
                 as={Link}
@@ -55,7 +58,7 @@ const HeaderComponent = () => {
               <NavDropdown.Item eventKey="/user" as={Link} to="/user">
                 My profile
               </NavDropdown.Item>
-              <NavDropdown.Item>Logout</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => dispatch(logout())}>Logout</NavDropdown.Item>
             </NavDropdown>
             <LinkContainer to="/login">
               <Nav.Link>Login</Nav.Link>
@@ -80,3 +83,4 @@ const HeaderComponent = () => {
 };
 
 export default HeaderComponent;
+
