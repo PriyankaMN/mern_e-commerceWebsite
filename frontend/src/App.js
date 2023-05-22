@@ -24,7 +24,7 @@ import UserCartDetailsPage from "./pages/user/UserCartDetailsPage";
 import UserOrderDetailsPage from "./pages/user/UserOrderDetailsPage";
 
 // protected admin pages:
-import AdminUsersPage from "./pages/admin/AdminUserPage";
+import AdminUsersPage from "./pages/admin/AdminUsersPage";
 import AdminEditUserPage from "./pages/admin/AdminEditUserPage";
 import AdminProductsPage from "./pages/admin/AdminProductsPage";
 import AdminCreateProductPage from "./pages/admin/AdminCreateProductPage";
