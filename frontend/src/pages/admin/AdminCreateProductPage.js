@@ -1,22 +1,34 @@
 import CreateProductPageComponent from "./components/CreateProductPageComponent";
 import axios from "axios";
+import {
+  uploadImagesApiRequest,
+  uploadImagesCloudinaryApiRequest,
+} from "./utils/utils";
+import { useSelector } from "react-redux";
+import { newCategory,deleteCategory, saveAttributeToCatDoc } from "../../redux/actions/categoryActions";
+import { useDispatch } from "react-redux";
 
 const createProductApiRequest = async (formInputs) => {
-    const { data } = await axios.post(`/api/products/admin`, { ...formInputs });
-    return data;
-}
-
-const uploadImagesApiRequest = async (images, productId) => {
-    const formData = new FormData();
-    Array.from(images).forEach(image => {
-        formData.append("images", image);
-    })
-    await axios.post("/api/products/admin/upload?productId=" + productId, formData);
-}
+  const { data } = await axios.post(`/api/products/admin`, { ...formInputs });
+  return data;
+};
 
 const AdminCreateProductPage = () => {
-  
-  return <CreateProductPageComponent createProductApiRequest={createProductApiRequest} uploadImagesApiRequest={uploadImagesApiRequest} />;
+  const { categories } = useSelector((state) => state.getCategories);
+  const dispatch = useDispatch();
+
+  return (
+    <CreateProductPageComponent
+      createProductApiRequest={createProductApiRequest}
+      uploadImagesApiRequest={uploadImagesApiRequest}
+      uploadImagesCloudinaryApiRequest={uploadImagesCloudinaryApiRequest}
+      categories={categories}
+      reduxDispatch={dispatch}
+      newCategory={newCategory}
+      deleteCategory={deleteCategory}
+      saveAttributeToCatDoc={saveAttributeToCatDoc}
+    />
+  );
 };
 
 export default AdminCreateProductPage;
