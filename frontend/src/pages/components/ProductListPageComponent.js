@@ -35,7 +35,7 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
   useEffect(() => {
     if (categoryName) {
       let categoryAllData = categories.find(
-        (item) => item.name === categoryName.replaceAll(",", "/")
+        (item) => item.name === categoryName.replace(/\//g, "/")
       );
       if (categoryAllData) {
         let mainCategory = categoryAllData.name.split("/")[0];
@@ -81,7 +81,7 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
   }, [categoryName, pageNumParam, searchQuery, filters, sortOption]);
 
   const handleFilters = () => {
-     navigate(location.pathname.replace(/\/[0-9]+$/, "")); 
+    navigate(location.pathname.replace(/\/[0-9]+$/, ""));
     setShowResetFiltersButton(true);
     setFilters({
       price: price,
@@ -173,4 +173,3 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
 };
 
 export default ProductListPageComponent;
-
