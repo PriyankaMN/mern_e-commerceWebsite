@@ -14,7 +14,7 @@ Some of the e-commerce app features:
 •	star rating system and reviews
 •	real time sales charts using SocketIO
 •	chat using SocketIO
-•	deploy application to Heroku & Render
+•	deploy application to Render
 •	React local state
 •	Redux state
 •	beautiful functional programming using React Hooks
